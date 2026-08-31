@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 
 const SITE_ROOT = path.resolve(__dirname, "..");
 const CONTENT_DIR = path.join(SITE_ROOT, "content", "posts");
+const ABOUT_FILE = path.join(SITE_ROOT, "content", "about.md");
 const TEMPLATES_DIR = path.join(SITE_ROOT, "templates");
 const DIST_DIR = path.join(SITE_ROOT, "dist");
 
@@ -119,9 +120,17 @@ ${posts.length === 0 ? "<p>記事はまだありません。</p>" : `<ul>\n${lis
 }
 
 async function generateAboutPage(eta: Eta) {
+  let bodyMarkdown = "";
+  if (await fs.pathExists(ABOUT_FILE)) {
+    bodyMarkdown = await fs.readFile(ABOUT_FILE, "utf-8");
+  }
+
+  const rawHtml = marked.parse(bodyMarkdown);
+  const bodyHtml = sanitizeHtml(typeof rawHtml === "string" ? rawHtml : await rawHtml);
+
   const content = `
 <h2>このサイトについて</h2>
-<p>This is a personal blog powered by Discord bot and static site generator.</p>
+${bodyHtml}
 `;
 
   const html = eta.render("about", { content });
