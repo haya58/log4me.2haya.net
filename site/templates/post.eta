@@ -1,0 +1,1 @@
+<%~ include("_layout", { title: it.post.title + " | log4me", content: it.content }) %>

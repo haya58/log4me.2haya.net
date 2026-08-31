@@ -1,0 +1,32 @@
+body, html, h1, h2, h3, h4, h5, h6 {
+  font-family: "M PLUS 1", sans-serif;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
+
+header nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-sep {
+  color: #888;
+}
+
+.post-date {
+  display: block;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.site-title {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.post-title {
+  text-align: left;
+}
